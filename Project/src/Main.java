@@ -5,15 +5,6 @@ import java.util.Set;
 
 Help: https://www.baeldung.com/hibernate-one-to-many
 
-Compile and run from command line:
-
-   ./run.sh on linux and mac
-   .\run.bat on windows
-
-For VisualStudio add: 
-"vmArgs": "--add-opens=java.base/java.nio=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED" 
-at .vscode/launch.json
-
 */
 
 public class Main {
