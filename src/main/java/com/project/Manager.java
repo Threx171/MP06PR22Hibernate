@@ -36,13 +36,13 @@ public class Manager {
         factory.close();
     }
   
-    public static Cart addCart(String type){
+    public static Ciutat addCiutat(String type){
         Session session = factory.openSession();
         Transaction tx = null;
-        Cart result = null;
+        Ciutat result = null;
         try {
             tx = session.beginTransaction();
-            result = new Cart(type);
+            result = new Ciutat(type);
             session.save(result); 
             tx.commit();
         } catch (HibernateException e) {
@@ -55,13 +55,13 @@ public class Manager {
         return result;
     }
 
-    public static Item addItem(String name){
+    public static Ciutada addItem(String name, String cognom, int edat){
         Session session = factory.openSession();
         Transaction tx = null;
-        Item result = null;
+        Ciutada result = null;
         try {
             tx = session.beginTransaction();
-            result = new Item(name);
+            result = new Ciutada(name, cognom, edat);
             session.save(result); 
             tx.commit();
         } catch (HibernateException e) {
@@ -91,13 +91,13 @@ public class Manager {
         return obj;
     }
 
-    public static void updateItem(long itemId, String name){
+    public static void updateCiutada(long ciutadaId, String name){
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Item obj = (Item) session.get(Item.class, itemId); 
-            obj.setName(name);
+            Ciutada obj = (Ciutada) session.get(Ciutada.class, ciutadaId); 
+            obj.setNom(name);
             session.update(obj); 
             tx.commit();
         } catch (HibernateException e) {
@@ -108,14 +108,14 @@ public class Manager {
         }
     }
     
-    public static void updateCart(long cartId, String type, Set<Item> items){
+    public static void updateCiutat(long ciutatId, String nom, Set<Ciutada> citizens){
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
-            Cart obj = (Cart) session.get(Cart.class, cartId); 
-            obj.setType(type);
-            obj.setItems(items);
+            Ciutat obj = (Ciutat) session.get(Ciutat.class, ciutatId); 
+            obj.setNom(nom);
+            obj.setCiutadans(citizens);
             session.update(obj); 
             tx.commit();
         } catch (HibernateException e) {
