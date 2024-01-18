@@ -9,7 +9,9 @@
             <generator class="native"/>
         </id>
         <property name = "nom" column = "nom" type = "string"/>
-        <set name="ciutada" cascade="all">
+        <property name = "pais" column = "pais" type = "string"/>
+        <property name = "codiPostal" column = "codiPostal" type = "integer"/>
+        <set name="ciutadans" cascade="all">
             <key column="ciutatId"/>
             <one-to-many class="com.project.Ciutada"/>
         </set>

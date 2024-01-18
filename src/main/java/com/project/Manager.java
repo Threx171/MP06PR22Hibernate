@@ -36,13 +36,13 @@ public class Manager {
         factory.close();
     }
   
-    public static Ciutat addCiutat(String type){
+    public static Ciutat addCiutat(String name, String country, int postalCode){
         Session session = factory.openSession();
         Transaction tx = null;
         Ciutat result = null;
         try {
             tx = session.beginTransaction();
-            result = new Ciutat(type);
+            result = new Ciutat(name, country, postalCode);
             session.save(result); 
             tx.commit();
         } catch (HibernateException e) {
@@ -55,13 +55,13 @@ public class Manager {
         return result;
     }
 
-    public static Ciutada addItem(String name, String cognom, int edat){
+    public static Ciutada addCiutada(long ciutatId, String name, String cognom, int edat){
         Session session = factory.openSession();
         Transaction tx = null;
         Ciutada result = null;
         try {
             tx = session.beginTransaction();
-            result = new Ciutada(name, cognom, edat);
+            result = new Ciutada(ciutatId, name, cognom, edat);
             session.save(result); 
             tx.commit();
         } catch (HibernateException e) {
@@ -91,13 +91,15 @@ public class Manager {
         return obj;
     }
 
-    public static void updateCiutada(long ciutadaId, String name){
+    public static void updateCiutada(long ciutadaId, String name, String cognom, int edat){
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             Ciutada obj = (Ciutada) session.get(Ciutada.class, ciutadaId); 
             obj.setNom(name);
+            obj.setCognom(cognom);
+            obj.setEdat(edat);
             session.update(obj); 
             tx.commit();
         } catch (HibernateException e) {
@@ -108,13 +110,15 @@ public class Manager {
         }
     }
     
-    public static void updateCiutat(long ciutatId, String nom, Set<Ciutada> citizens){
+    public static void updateCiutat(long ciutatId, String nom, String pais, int postalCode, Set<Ciutada> citizens){
         Session session = factory.openSession();
         Transaction tx = null;
         try {
             tx = session.beginTransaction();
             Ciutat obj = (Ciutat) session.get(Ciutat.class, ciutatId); 
             obj.setNom(nom);
+            obj.setPais(pais);
+            obj.setCodiPostal(postalCode);
             obj.setCiutadans(citizens);
             session.update(obj); 
             tx.commit();
